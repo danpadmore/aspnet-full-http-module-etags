@@ -1,0 +1,55 @@
+﻿@model ETag.Example.Models.Home.IndexModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example</title>
+    @Styles.Render("~/Content/css")
+</head>
+<body>
+    <div class="container body-content">
+        <form id="dummy-form">
+            <div class="form-group">
+                <label for="etag" class="control-label">ETag</label>
+                <input id="etag" name="etag" type="text" class="form-control" />
+            </div>
+
+            <button id="get-dummy-data" type="submit" class="btn btn-success">Get dummy data</button>
+        </form>
+
+        <div id="dummy-data"></div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script>
+        $(function () {
+            $("#dummy-form").submit(function (event) {
+                event.preventDefault();
+
+                const jqXHR = $.ajax({
+                    type: "GET",
+                    beforeSend: function (request) {
+                        const etag = $('#etag').val();
+                        if (etag) {
+                            console.log(etag);
+                            request.setRequestHeader("If-None-Match", etag);
+                        }
+                    },
+                    url: "/home/dummy",
+                    success: function (msg) {
+                        $("#etag").val(jqXHR.getResponseHeader("ETag"));
+
+                        if(msg)
+                            $("#dummy-data").append(`<div>${new Date()} - ${msg}</div>`);
+                        else
+                            $("#dummy-data").append(`<div>${new Date()} - served from cache</div>`);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

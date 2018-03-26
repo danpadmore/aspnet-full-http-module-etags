@@ -4,7 +4,7 @@ using System.IO;
 using System.Text;
 using System.Web;
 
-namespace ETag.HttpModule
+namespace ETag.HttpModule.ETagResponse
 {
     /// <summary>
     /// Records data written to response, so it can be inspected after the response stream has closed

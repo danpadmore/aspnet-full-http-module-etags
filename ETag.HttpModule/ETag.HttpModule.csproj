@@ -42,8 +42,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ETagModule.cs" />
+    <Compile Include="ETagResponse\ETagResponder.cs" />
+    <Compile Include="ETagResponse\IETagResponder.cs" />
+    <Compile Include="ETagStore.cs" />
+    <Compile Include="ETagValidation\ETagValidator.cs" />
+    <Compile Include="ETagValidation\IETagValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="HttpResponseRecorder.cs" />
+    <Compile Include="ETagResponse\HttpResponseRecorder.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

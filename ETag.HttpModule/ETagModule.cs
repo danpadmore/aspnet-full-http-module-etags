@@ -4,14 +4,6 @@ using System.Web;
 
 namespace ETag.HttpModule
 {
-    /// <summary>
-    /// Adds ETag to all responses
-    /// Aborts request with a 304 when If-None-Match matches ETag of requested resource
-    /// 
-    /// Note: compares received ETag as is, doesn't implement strong/weak validation
-    /// 
-    /// Based on https://en.wikipedia.org/wiki/HTTP_ETag
-    /// </summary>
     public class ETagModule : IHttpModule
     {
         private readonly IETagResponder ETagResponder;
